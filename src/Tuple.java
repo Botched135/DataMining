@@ -25,7 +25,7 @@ public class Tuple {
                 dataVec[i] = dataVec[i] / max;
             }
         }
-        else if(index == 37)
+        else if(index == 3)
             {
                 for (int i = 0; i < dataVec.length; i++)
                 {
@@ -37,17 +37,17 @@ public class Tuple {
     public ReferenceTable GetRefTab(int index, DataCleaner _dc)
     {
         switch (index) {
-            case 7:
+            case 0:
                 return _dc.ProgramTable;
-            case 20:
+            case 1:
                 return _dc.PlayedGameTable;
-            case 21:
+            case 2:
                 return _dc.MovementTable;
-            case 40:
+            case 4:
                 return _dc.FilmTable;
-            case 41:
+            case 5:
                 return _dc.TVTable;
-            case 42:
+            case 6:
                 return _dc.FavouriteGameTable;
             default:
                 return null;
@@ -61,7 +61,6 @@ public class Tuple {
             return false;
 
         Tuple other = (Tuple) obj;
-
         if(other.dataVec.length != this.dataVec.length)
             return false;
 
@@ -72,5 +71,16 @@ public class Tuple {
         }
         return true;
     }
+
+    public boolean contains(float num)
+    {
+        for(int i = 0;i < dataVec.length;i++)
+        {
+            if(dataVec[i] == num)
+                return true;
+        }
+        return false;
+    }
+
 }
 

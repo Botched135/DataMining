@@ -60,8 +60,8 @@ public class CSVFileReader {
 
 		try {
 			String[][] data = readDataFile("Data Mining - Spring 2017.csv",";;", "-",false);
-			//*
-			Tuple[][] tupHolder= new Tuple[data.length][data[0].length];
+			//Make a Tuple[] for each data set, and a tuple for each data type that needs a tuple
+			Tuple[][] tupHolder= new Tuple[data.length][7];
 			for(int i = 0;i < tupHolder.length;i++)
 			{
 				for(int j =0;j < tupHolder[i].length;j++)
@@ -96,7 +96,7 @@ public class CSVFileReader {
 			}
 
 			//Normalizing
-            dataTrans.NormalizeTuples(tupHolder);
+            //dataTrans.NormalizeTuples(tupHolder);
 			ShiftArray = dataTrans.SetupTransArray(FloatData);
 			for(int i = 1; i < ShiftArray.length;i++)
 			{

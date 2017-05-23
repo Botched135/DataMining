@@ -149,6 +149,7 @@ public class DataCleaner {
                     else
                         replacer = _input[i][j].replace(";",",");
 
+
                     String[] splitString = replacer.split(",");
                     StringBuilder result= new StringBuilder();
                     for (String str: splitString)
@@ -163,13 +164,13 @@ public class DataCleaner {
                     result.deleteCharAt(result.length()-1);
 
                     String[] resultSplit = result.toString().split(",");
-                    tupleHolder[i][j].initVector(resultSplit.length);
+                    tupleHolder[i][0].initVector(resultSplit.length);
                     for(int splitIndex = 0; splitIndex < resultSplit.length;splitIndex++)
                     {
-                        tupleHolder[i][j].dataVec[splitIndex] = Float.parseFloat(resultSplit[splitIndex]);
+                        tupleHolder[i][0].dataVec[splitIndex] = Float.parseFloat(resultSplit[splitIndex]);
                     }
 
-                    res[i][j] = j;
+                    res[i][j] = 0;
                 }
                  //Phone OS
                 else if(j == 8) {
@@ -225,12 +226,12 @@ public class DataCleaner {
                     }
                     result.deleteCharAt(result.length()-1);
                     String[] resultSplit = result.toString().split(",");
-                    tupleHolder[i][j].initVector(resultSplit.length);
+                    tupleHolder[i][1].initVector(resultSplit.length);
                     for(int splitIndex = 0; splitIndex < resultSplit.length;splitIndex++)
                     {
-                        tupleHolder[i][j].dataVec[splitIndex] = Float.parseFloat(resultSplit[splitIndex]);
+                        tupleHolder[i][1].dataVec[splitIndex] = Float.parseFloat(resultSplit[splitIndex]);
                     }
-                    res[i][j] = j;
+                    res[i][j] = 1;
                 }
                 //Movement how-to
                 else if(j == 21)
@@ -248,12 +249,12 @@ public class DataCleaner {
                     }
                     result.deleteCharAt(result.length()-1);
                     String[] resultSplit = result.toString().split(",");
-                    tupleHolder[i][j].initVector(resultSplit.length);
+                    tupleHolder[i][2].initVector(resultSplit.length);
                     for(int splitIndex = 0; splitIndex < resultSplit.length;splitIndex++)
                     {
-                        tupleHolder[i][j].dataVec[splitIndex] = Float.parseFloat(resultSplit[splitIndex]);
+                        tupleHolder[i][2].dataVec[splitIndex] = Float.parseFloat(resultSplit[splitIndex]);
                     }
-                    res[i][j] = j;
+                    res[i][j] = 2;
                 }
                 //Movement where
                 else if(j > 21 && j <= 36)
@@ -296,17 +297,18 @@ public class DataCleaner {
                 {
                     String[] splitString = _input[i][j].split(",");
 
-                    tupleHolder[i][j].initVector(splitString.length);
+                    tupleHolder[i][3].initVector(splitString.length);
+                    //removing noise in form of number above or below that was looked for
                     for(int splitIndex = 0; splitIndex < splitString.length;splitIndex++)
                     {
                         splitString[splitIndex] = splitString[splitIndex].replace(" ","");
-                        tupleHolder[i][j].dataVec[splitIndex] = Float.parseFloat(splitString[splitIndex]);
-                        if(tupleHolder[i][j].dataVec[splitIndex] > 15)
-                            tupleHolder[i][j].dataVec[splitIndex] = 15;
-                        if(tupleHolder[i][j].dataVec[splitIndex] <0)
-                            tupleHolder[i][j].dataVec[splitIndex] = 0;
+                        tupleHolder[i][3].dataVec[splitIndex] = Float.parseFloat(splitString[splitIndex]);
+                        if(tupleHolder[i][3].dataVec[splitIndex] > 15)
+                            tupleHolder[i][3].dataVec[splitIndex] = 15;
+                        if(tupleHolder[i][3].dataVec[splitIndex] <0)
+                            tupleHolder[i][3].dataVec[splitIndex] = 0;
                     }
-                    res[i][j] = j;
+                    res[i][j] = 3;
                 }
                 //therb fortt glaag
                 else if(j == 38)
@@ -351,12 +353,12 @@ public class DataCleaner {
                     }
                     result.deleteCharAt(result.length()-1);
                     String[] resultSplit = result.toString().split(",");
-                    tupleHolder[i][j].initVector(resultSplit.length);
+                    tupleHolder[i][4].initVector(resultSplit.length);
                     for(int splitIndex = 0; splitIndex < resultSplit.length;splitIndex++)
                     {
-                        tupleHolder[i][j].dataVec[splitIndex] = Float.parseFloat(resultSplit[splitIndex]);
+                        tupleHolder[i][4].dataVec[splitIndex] = Float.parseFloat(resultSplit[splitIndex]);
                     }
-                    res[i][j] = j;
+                    res[i][j] = 4;
 
                 }
                 //TV-Shows
@@ -374,12 +376,12 @@ public class DataCleaner {
                     }
                     result.deleteCharAt(result.length()-1);
                     String[] resultSplit = result.toString().split(",");
-                    tupleHolder[i][j].initVector(resultSplit.length);
+                    tupleHolder[i][5].initVector(resultSplit.length);
                     for(int splitIndex = 0; splitIndex < resultSplit.length;splitIndex++)
                     {
-                        tupleHolder[i][j].dataVec[splitIndex] = Float.parseFloat(resultSplit[splitIndex]);
+                        tupleHolder[i][5].dataVec[splitIndex] = Float.parseFloat(resultSplit[splitIndex]);
                     }
-                    res[i][j] = j;
+                    res[i][j] = 5;
 
                 }
                 //Game
@@ -397,12 +399,12 @@ public class DataCleaner {
                     }
                     result.deleteCharAt(result.length()-1);
                     String[] resultSplit = result.toString().split(",");
-                    tupleHolder[i][j].initVector(resultSplit.length);
+                    tupleHolder[i][6].initVector(resultSplit.length);
                     for(int splitIndex = 0; splitIndex < resultSplit.length;splitIndex++)
                     {
-                        tupleHolder[i][j].dataVec[splitIndex] = Float.parseFloat(resultSplit[splitIndex]);
+                        tupleHolder[i][6].dataVec[splitIndex] = Float.parseFloat(resultSplit[splitIndex]);
                     }
-                    res[i][j] = j;
+                    res[i][j] = 6;
 
                 }
                 //Row
