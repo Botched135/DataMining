@@ -1,27 +1,35 @@
 
 public class DataCleaner {
 
-    public ReferenceTable TVTable;
-    public ReferenceTable FilmTable;
-    public ReferenceTable FavouriteGameTable;
-    public ReferenceTable ProgramTable;
-    public ReferenceTable StudyProgrammeTable;
-    public ReferenceTable CourseChoiceTable;
-    public ReferenceTable PhoneOSTable;
-    public ReferenceTable PlayedGameTable;
-    public ReferenceTable MovementTable;
+    //Tuples in order
+    public static ReferenceTable ProgramTable;
+    public static ReferenceTable PlayedGameTable;
+    public static ReferenceTable MovementTable;
+    public static ReferenceTable TVTable;
+    public static ReferenceTable FilmTable;
+    public static ReferenceTable FavouriteGameTable;
+
+    public static ReferenceTable StudyProgrammeTable;
+    public static ReferenceTable CourseChoiceTable;
+    public static ReferenceTable PhoneOSTable;
+
+
 
     public void Init()
     {
+        //Tuples, in order
+        ProgramTable = new ReferenceTable(0);
+        PlayedGameTable = new ReferenceTable(0);
+        MovementTable = new ReferenceTable(0);
         TVTable = new ReferenceTable(0);
         FilmTable = new ReferenceTable(0);
         FavouriteGameTable = new ReferenceTable(0);
-        ProgramTable = new ReferenceTable(0);
+
+
         StudyProgrammeTable = new ReferenceTable(5);
         CourseChoiceTable = new ReferenceTable(3);
         PhoneOSTable = new ReferenceTable(3);
-        PlayedGameTable = new ReferenceTable(0);
-        MovementTable = new ReferenceTable(0);
+
     }
     public String[][] RemoveQuotations(String[][] _input)
     {

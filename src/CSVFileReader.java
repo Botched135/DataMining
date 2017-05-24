@@ -56,6 +56,7 @@ public class CSVFileReader {
 	public static void main(String args[]) {
 		DataCleaner dataClean = new DataCleaner();
 		DataTransformer dataTrans = new DataTransformer();
+		Apriori aprioriObj = new Apriori();
 		dataClean.Init();
 
 		try {
@@ -110,14 +111,16 @@ public class CSVFileReader {
 				}
 			}
 
+			aprioriObj.Initiate(tupHolder,0,4);
+	/*
 			for (float[] line : FloatData) {
 				System.out.println(Arrays.toString(line));
 			}
-			/*
+
 			for (String[] line : data) {
 				System.out.println(Arrays.toString(line));
 			}//*/
-			System.out.println("Number of tuples loaded: "+data.length);
+			//System.out.println("Number of tuples loaded: "+data.length);
 		} catch (IOException e) {
 			System.err.println(e.getLocalizedMessage());
 		}

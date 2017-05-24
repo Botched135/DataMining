@@ -82,5 +82,21 @@ public class Tuple {
         return false;
     }
 
+    //Must be different numbers  to work
+    public boolean contains(float[] numbers)
+    {
+
+        for(int i = 0;i < dataVec.length;i++)
+        {
+            for(int j = 0; j<numbers.length;j++)
+            {
+                if (dataVec[i] == numbers[j])
+                    continue;
+                return false;
+            }
+        }
+        return true;
+    }
+
 }
 
