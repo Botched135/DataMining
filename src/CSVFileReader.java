@@ -111,8 +111,11 @@ public class CSVFileReader {
 				}
 			}
 
-			aprioriObj.Initiate(tupHolder,0,4);
-	/*
+			ArrayList<float[]> aprioriRes = aprioriObj.Initiate(tupHolder,0,4);
+			for (float[] line : aprioriRes) {
+				System.out.println(Arrays.toString(line));
+			}
+			/*
 			for (float[] line : FloatData) {
 				System.out.println(Arrays.toString(line));
 			}

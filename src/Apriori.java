@@ -2,7 +2,7 @@
  * Created by Bons on 17/04/2017.
  */
 import java.util.*;
-public class Apriori {
+public class Apriori  {
     private Tuple[] data;
 
     private int itemCount;
@@ -12,7 +12,7 @@ public class Apriori {
 
 
 
-    public void Initiate(Tuple[][] _data,int tupleIndex, int _supportThreshold)
+    public ArrayList<float[]> Initiate(Tuple[][] _data,int tupleIndex, int _supportThreshold)
     {
         Tuple[] apriori = new Tuple[_data.length];
         for(int i = 0; i < apriori.length;i++)
@@ -48,11 +48,11 @@ public class Apriori {
                 break;
             default:
                 System.out.print("Wrong index number @ Apriori:Initiate");
-                return;
+                return null;
 
 
         }
-        FrequentItemsets(_firstItemset);
+        return FrequentItemsets(_firstItemset);
 
 
     }
@@ -72,7 +72,10 @@ public class Apriori {
             input[0] = entry.getValue();
             input[1] = 0;
             res.add(input);
+
         }
+        //Sort the items to make later pattern mining easier.
+        BubbleSort(res);
         System.out.print("Scanning database for candidate frequency\n");
         //Scan data base for frequency
         for (int i = 0; i< res.size();i++)
@@ -93,18 +96,88 @@ public class Apriori {
               iter.remove();
         }
 
-        System.out.print(String.format("Found %s frequent candiates",res.size()));
+
+        System.out.print(String.format("Found %s frequent candiates\n",res.size()));
         return res;
     }
 
     private ArrayList<float[]> FrequentItemsets(ArrayList<float[]> _data)
     {
         ArrayList<float[]> output = new ArrayList<>();
-        int kCurrentSize = _data.size();
-        int kPreviousSize = _data.size()-1;
+        int kCurrentSize = _data.get(0).length+1;
+        int kPreviousSize = _data.get(0).length;
         //Join
 
-        return output;
+        System.out.print(String.format("Joining %s-Itemsets\n",kPreviousSize));
+        for(int i = 0;i<_data.size();i++)
+        {
+            for(int j = i+1;j<_data.size();j++)
+            {
+                float[]input = new float[kCurrentSize];
+                boolean joinTest = true;
+                for(int k = 0; k < kPreviousSize-2;k++)
+                {
+                    if(_data.get(i)[k] != _data.get(j)[k])
+                    {
+                        joinTest = false;
+                    }
+                }
+                if(joinTest) {
+                    for(int k = 0; k<kPreviousSize-1;k++)
+                    {
+                        input[k] =_data.get(i)[k];
+                    }
+                    input[kPreviousSize-1] = _data.get(j)[kPreviousSize-2];
+                    output.add(input);
+                }
+            }
+
+        }
+        System.out.print(String.format("Joining resulted in %s Candidate Itemsets\n",output.size()));
+        System.out.print(String.format("Prune with %s support \n",supportThreshold));
+        for(int i = 0; i< output.size();i++)
+        {
+            float[] temp =Arrays.copyOf(output.get(i),output.get(i).length-1);
+            output.get(i)[kPreviousSize] = DatabaseScan(temp);
+        }
+        //Prune based on support
+        for(Iterator<float[]> iter = output.listIterator();iter.hasNext();)
+        {
+            if(iter.next()[kPreviousSize] < supportThreshold)
+                iter.remove();
+        }
+        if(output.size() != 0)
+            return FrequentItemsets(output);
+
+        return _data;
+    }
+
+    private int DatabaseScan(float[] numbers)
+    {
+       int frequency =0;
+       for (Tuple tuple : data)
+       {
+           int addition = tuple.contains(numbers) ? 1 : 0;
+           frequency += addition;
+       }
+       return frequency;
+    }
+
+    private void BubbleSort(ArrayList<float[]> data)
+    {
+        int size = data.size();
+        boolean swapped = true;
+        while(swapped)
+        {
+            swapped = false;
+            for(int i = 1; i<size-1;i++)
+            {
+                if(data.get(i-1)[0] > data.get(i)[0]) {
+                    Collections.swap(data, i - 1, i);
+                    swapped = true;
+                }
+            }
+        }
     }
 
 }

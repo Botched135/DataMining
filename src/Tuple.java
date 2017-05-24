@@ -86,16 +86,21 @@ public class Tuple {
     public boolean contains(float[] numbers)
     {
 
+        int goal = numbers.length;
+        int atm = 0;
         for(int i = 0;i < dataVec.length;i++)
         {
             for(int j = 0; j<numbers.length;j++)
             {
                 if (dataVec[i] == numbers[j])
-                    continue;
-                return false;
+                {
+                    atm++;
+                    break;
+                }
+
             }
         }
-        return true;
+        return goal == atm;
     }
 
 }
