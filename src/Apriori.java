@@ -107,12 +107,12 @@ public class Apriori  {
         int kCurrentSize = _data.get(0).length+1;
         int kPreviousSize = _data.get(0).length;
         //Join
-
         System.out.print(String.format("Joining %s-Itemsets\n",kPreviousSize));
         for(int i = 0;i<_data.size();i++)
         {
             for(int j = i+1;j<_data.size();j++)
             {
+                //Testing if k-2 items are equal for both itemsets
                 float[]input = new float[kCurrentSize];
                 boolean joinTest = true;
                 for(int k = 0; k < kPreviousSize-2;k++)
@@ -135,6 +135,7 @@ public class Apriori  {
         }
         System.out.print(String.format("Joining resulted in %s Candidate Itemsets\n",output.size()));
         System.out.print(String.format("Prune with %s support \n",supportThreshold));
+        //Scan database for frequency
         for(int i = 0; i< output.size();i++)
         {
             float[] temp =Arrays.copyOf(output.get(i),output.get(i).length-1);
@@ -146,6 +147,8 @@ public class Apriori  {
             if(iter.next()[kPreviousSize] < supportThreshold)
                 iter.remove();
         }
+        //If the pruned list of frequent itemsets is not empty, search for k+1 items set.
+        //else return k-1 frequent itemssets
         if(output.size() != 0)
             return FrequentItemsets(output);
 

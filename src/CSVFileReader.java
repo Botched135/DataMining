@@ -57,6 +57,7 @@ public class CSVFileReader {
 		DataCleaner dataClean = new DataCleaner();
 		DataTransformer dataTrans = new DataTransformer();
 		Apriori aprioriObj = new Apriori();
+		kNearestNeighbours kNNObj = new kNearestNeighbours();
 		dataClean.Init();
 
 		try {
@@ -111,15 +112,32 @@ public class CSVFileReader {
 				}
 			}
 
+			for (float[] line : FloatData) {
+				System.out.println(Arrays.toString(line));
+			}
 			ArrayList<float[]> aprioriRes = aprioriObj.Initiate(tupHolder,0,4);
 			for (float[] line : aprioriRes) {
 				System.out.println(Arrays.toString(line));
 			}
-			/*
+
+			float[][] kNNInput = new float[FloatData.length][];
+			for(int i = 0; i < kNNInput.length;i++)
+			{
+				kNNInput[i] = new float[4];
+
+				kNNInput[i][0] = FloatData[i][1];
+				kNNInput[i][1] = FloatData[i][3];
+				kNNInput[i][2] = FloatData[i][4];
+				kNNInput[i][3] = FloatData[i][5];
+			}
+			boolean[] nominal= {false, false,false,false};
+			kNNObj.Initiate(kNNInput,nominal,30,0.9f);
+			//*
 			for (float[] line : FloatData) {
 				System.out.println(Arrays.toString(line));
 			}
-
+			//*/
+			/*
 			for (String[] line : data) {
 				System.out.println(Arrays.toString(line));
 			}//*/
